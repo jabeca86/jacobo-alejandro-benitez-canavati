@@ -1,6 +1,6 @@
-CREATE DATABASE ecommerce;
+CREATE DATABASE ecart;
 
-USE ecommerce;
+USE ecart;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
