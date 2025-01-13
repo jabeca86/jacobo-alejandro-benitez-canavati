@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Tendancys Test App
+          Ecart Test App
         </p>
         <small>by Jacobo Alejandro Ben&iacute;tez Canavati</small>
       </header>
