@@ -1,3 +1,5 @@
+-- This file is just for reference, not an actual App script
+    
 CREATE DATABASE productdb;
 
 USE ecart;
