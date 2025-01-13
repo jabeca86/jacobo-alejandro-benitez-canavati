@@ -1,4 +1,4 @@
-# Tendancys Test App
+# Ecart Test App
 
 ## Available Scripts
 
