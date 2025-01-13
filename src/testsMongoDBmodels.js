@@ -1,3 +1,5 @@
+// This file is just for reference, not an actual App script
+
 connection.query("SELECT * FROM users WHERE age > 25", (err, results) => {
     if (err) throw err;
     console.log(results);
