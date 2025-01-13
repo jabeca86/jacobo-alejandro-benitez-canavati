@@ -6,7 +6,7 @@ const dbName = 'ecart';
 let db;
 
 async function connectToDatabase() {
-    if (db) return db; // Return existing connection if it exists
+    if (db) return db;
 
     try {
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
