@@ -1,3 +1,5 @@
+// This file is just for reference, not an actual App script
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
