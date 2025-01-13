@@ -1,4 +1,4 @@
-CREATE DATABASE ecart;
+CREATE DATABASE productdb;
 
 USE ecart;
 
