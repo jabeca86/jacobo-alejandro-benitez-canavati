@@ -22,7 +22,7 @@ connection.connect((err) => {
 });
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/yourdatabase', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/productdb', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const User = mongoose.model('User', new mongoose.Schema({ name: String, age: Number }));
 
