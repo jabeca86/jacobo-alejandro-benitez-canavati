@@ -1,3 +1,5 @@
+// This file is just for reference, not an actual App script
+
 const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: 'localhost',
