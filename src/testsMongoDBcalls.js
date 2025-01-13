@@ -1,26 +1,32 @@
-connection.query("SELECT * FROM users WHERE age > 25", (err, results) => {
-    if (err) throw err;
-    console.log(results);
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'yourusername',
+    password: 'yourpassword',
+    database: 'yourdatabase'
 });
 
-const User = mongoose.model('User', new mongoose.Schema({ name: String, age: Number }));}
-    User.find({ age: { $gt: 25 } }, (err, users) => {
+connection.connect((err) => {
     if (err) throw err;
-        console.log(users);
+    console.log('Connected to MySQL database');
+
+    connection.query("SELECT * FROM users WHERE age > 25", (err, results) => {
+        if (err) throw err;
+        console.log('SQL Results:', results);
+    });
+
+    connection.query("INSERT INTO users (name, age) VALUES (?, ?)", ["Alice", 30], (err) => {
+        if (err) throw err;
+        console.log('User inserted into SQL database');
+    });
 });
 
-const User = mongoose.model('User', new mongoose.Schema({ name: String, age: Number }));}
-    User.find({ age: { $gt: 25 } }, (err, users) => {
-    if (err) throw err;
-        console.log(users);
-});
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/yourdatabase', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const User = mongoose.model('User', new mongoose.Schema({ name: String, age: Number }));}
-    User.find({ age: { $gt: 25 } }, (err, users) => {
+const User = mongoose.model('User', new mongoose.Schema({ name: String, age: Number }));
+
+User.find({ age: { $gt: 25 } }, (err, users) => {
     if (err) throw err;
-        console.log(users);
-});
-  
-connection.query("INSERT INTO users (name, age) VALUES (?, ?)", ["Alice", 30], (err) => {
-    if (err) throw err;
+    console.log('MongoDB Results:', users);
 });
