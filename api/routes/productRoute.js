@@ -1,59 +1,28 @@
 const express = require('express');
-const Product = require('../models/productModel');
-
 const router = express.Router();
+const connectToDatabase = require('../config/db');
 
-router.post('/', async (req, res) => {
-  try {
-    const product = new Product(req.body);
-    const savedProduct = await product.save();
-    res.status(201).json(savedProduct);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+router.get('/items', async (req, res) => {
+    try {
+        const db = await connectToDatabase();
+        const items = await db.collection('items').find().toArray();
+        res.json(items);
+    } catch (error) {
+        console.error('Error fetching items', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
-router.get('/', async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-router.get('/:id', async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ message: 'Product not found' });
-    res.json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-router.put('/:id', async (req, res) => {
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    if (!updatedProduct) return res.status(404).json({ message: 'Product not found' });
-    res.json(updatedProduct);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-router.delete('/:id', async (req, res) => {
-  try {
-    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
-    if (!deletedProduct) return res.status(404).json({ message: 'Product not found' });
-    res.json({ message: 'Product deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+router.post('/items', async (req, res) => {
+    try {
+        const db = await connectToDatabase();
+        const newItem = req.body;
+        const result = await db.collection('items').insertOne(newItem);
+        res.status(201).json(result.ops[0]);
+    } catch (error) {
+        console.error('Error adding item', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 module.exports = router;
